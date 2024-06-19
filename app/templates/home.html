@@ -3,7 +3,9 @@
 
 {% block content %}
 <div class="container text-center mt-5">
-    <h1>Welcome to the MCQ Test Platform</h1>
-    <p class="lead">Please <a href="{{ url_for('routes.login') }}">log in</a> or <a href="{{ url_for('routes.register') }}">register</a> to continue.</p>
+    <div class="content-block py-5">
+        <h1>Welcome to the MCQ Test Platform</h1>
+        <p class="lead mt-4">Please <a href="{{ url_for('routes.login') }}" class="text-primary">log in</a> or <a href="{{ url_for('routes.register') }}" class="text-primary">register</a> to continue.</p>
+    </div>
 </div>
 {% endblock %}

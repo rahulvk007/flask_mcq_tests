@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% block title %}{{ test.title }} - Answers{% endblock %}
+
 {% block content %}
-    <div class="container">
+<div class="container mt-4">
+    <div class="content-block">
         <h2>{{ test.title }} - Answers</h2>
         <p>{{ test.description }}</p>
         <div class="table-responsive">
@@ -31,6 +34,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{ url_for('routes.test_detail', test_id=test.id) }}" class="btn btn-primary">Back to Test Details</a>
+        <a href="{{ url_for('routes.test_detail', test_id=test.id) }}" class="btn btn-primary mt-4">Back to Test Details</a>
     </div>
+</div>
 {% endblock %}

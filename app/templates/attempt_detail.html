@@ -2,19 +2,21 @@
 {% block title %}Attempt Detail{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Attempt Detail</h2>
-    <p>Score: {{ attempt.score }}</p>
-    
-    <h3>Responses:</h3>
-    <ul class="list-group">
-        {% for response, question in response_question_pairs %}
-            <li class="list-group-item">
-                <p>Question: {{ question.question_text }}</p>
-                <p>Your Answer:  {{ response.selected_option }}</p>
-                <p>Correct Answer: {{ question.answer }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="container mt-4">
+    <div class="content-block">
+        <h2 class="mb-4">Attempt Detail</h2>
+        <p class="lead">Score: <strong>{{ attempt.score }}</strong></p>
+        
+        <h3 class="mt-4 mb-3">Responses:</h3>
+        <ul class="list-group list-group-flush">
+            {% for response, question in response_question_pairs %}
+                <li class="list-group-item py-3">
+                    <p class="mb-2"><strong>Question:</strong> {{ question.question_text }}</p>
+                    <p class="mb-1"><strong>Your Answer:</strong> {{ response.selected_option }}</p>
+                    <p class="mb-0"><strong>Correct Answer:</strong> {{ question.answer }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

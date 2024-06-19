@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% block title %}Attempt Test{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h2>{{ test.title }}</h2>
+<div class="container mt-4">
+    <div class="content-block">
+        <h2 class="mb-4">{{ test.title }}</h2>
         <form method="POST">
             {% for question in questions %}
-                <div class="card mb-4">
+                <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ question.question_text }}</h5>
                         <div class="form-check">
@@ -26,15 +29,16 @@
                     </div>
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Submit Test</button>
+            <button type="submit" class="btn btn-primary btn-block">Submit Test</button>
         </form>
     </div>
+</div>
 
-    <style>
-        .form-check-input:checked + .form-check-label {
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            color: white;
-            border-color: #007bff;
-        }
-    </style>
+<style>
+    .form-check-input:checked + .form-check-label {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        color: white;
+        border-radius: 5px;
+    }
+</style>
 {% endblock %}

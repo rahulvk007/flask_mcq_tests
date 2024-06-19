@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow">
+                <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h2 class="mb-0">Upload Questions for {{ test.title }}</h2>
                     </div>
@@ -21,9 +21,9 @@
                                 <label for="file">Upload CSV File</label>
                                 <input type="file" name="file" class="form-control-file" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Upload</button>
+                            <button type="submit" class="btn btn-primary btn-block">Upload</button>
                         </form>
-                        <a href="{{ url_for('routes.test_detail', test_id=test.id) }}" class="btn btn-secondary mt-3">Back to Test Details</a>
+                        <a href="{{ url_for('routes.test_detail', test_id=test.id) }}" class="btn btn-secondary btn-block mt-3">Back to Test Details</a>
                     </div>
                 </div>
             </div>

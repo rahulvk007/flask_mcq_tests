@@ -2,27 +2,68 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center mt-5">
+<div class="container mt-4">
+    <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background-color: #5C6BC0; color: white;">
                     <h2 class="mb-0">Dashboard</h2>
                 </div>
                 <div class="card-body">
-                    <a href="{{ url_for('routes.new_test') }}" class="btn btn-primary mb-3">Create New Test</a>
+                    <a href="{{ url_for('routes.new_test') }}" class="btn btn-outline-primary btn-block mb-4">Create New Test</a>
                     <h3>Your Tests</h3>
-                    {% for test in tests %}
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="{{ url_for('routes.test_detail', test_id=test.id) }}">{{ test.title }}</a></h5>
-                                <p class="card-text">{{ test.description }}</p>
+                    <div class="list-group mt-3">
+                        {% for test in tests %}
+                            <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+                                <h5 class="mb-1">
+                                    <a href="{{ url_for('routes.test_detail', test_id=test.id) }}" class="text-dark">{{ test.title }}</a>
+                                </h5>
+                                <p class="mb-1">{{ test.description }}</p>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% else %}
+                            <p class="text-muted">You have not created any tests yet.</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    body {
+        background-color: #F4F5F7; /* A light grey for the background */
+    }
+    .card {
+        border: none; /* Remove border for a cleaner look */
+        border-radius: 10px; /* Slightly rounded corners */
+    }
+    .card-header {
+        border-bottom: none; /* No border at the bottom of the card header */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .btn-outline-primary {
+        color: #5C6BC0; /* Softer blue */
+        border-color: #5C6BC0;
+    }
+    .btn-outline-primary:hover {
+        background-color: #5C6BC0;
+        color: white;
+    }
+    .list-group-item {
+        border-radius: 8px; /* Slightly rounded corners for items */
+        transition: all 0.2s ease-in-out; /* Smooth transition effect */
+    }
+    .list-group-item:hover {
+        background-color: #E8EAF6; /* Light shade for hover effect */
+    }
+    h3 {
+        border-bottom: 2px solid #5C6BC0; /* Add a border to highlight the section */
+        padding-bottom: 10px; /* Space between text and border */
+    }
+    .text-muted {
+        color: #9E9E9E; /* Softer grey for the text */
+    }
+</style>
 {% endblock %}
