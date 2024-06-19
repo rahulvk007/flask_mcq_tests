@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{{ test.title }}</h2>
+    <form method="POST">
+        {% for question in questions %}
+            <div>
+                <p>{{ question.question_text }}</p>
+                <input type="radio" name="{{ question.id }}" value="1"> {{ question.option1 }}<br>
+                <input type="radio" name="{{ question.id }}" value="2"> {{ question.option2 }}<br>
+                <input type="radio" name="{{ question.id }}" value="3"> {{ question.option3 }}<br>
+                <input type="radio" name="{{ question.id }}" value="4"> {{ question.option4 }}<br>
+            </div>
+        {% endfor %}
+        <button type="submit">Submit Test</button>
+    </form>
+{% endblock %}

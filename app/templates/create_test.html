@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Create New Test</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label }}<br>
+            {{ form.title(size=64) }}<br>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=4) }}<br>
+            {{ form.allow_retake() }} Allow Retake<br>
+            {{ form.submit() }}
+        </div>
+    </form>
+{% endblock %}

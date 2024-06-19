@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Attempt Detail</h2>
+  <p>Score: {{ attempt.score }}</p>
+  
+  <h3>Responses:</h3>
+  <ul>
+    {% for response, question in response_question_pairs %}
+      <li>
+        <p>Question: {{ question.question_text }}</p>
+        <p>Your Answer: Option {{ response.selected_option }}</p>
+        <p>Correct Answer: Option {{ question.answer }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

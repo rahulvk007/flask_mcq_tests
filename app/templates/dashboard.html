@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Dashboard</h2>
+    <a href="{{ url_for('routes.new_test') }}">Create New Test</a>
+    <h3>Your Tests</h3>
+    {% for test in tests %}
+        <p><a href="{{ url_for('routes.test_detail', test_id=test.id) }}">{{ test.title }}</a></p>
+    {% endfor %}
+{% endblock %}
