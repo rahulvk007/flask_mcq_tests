@@ -231,7 +231,25 @@ def attempt_detail(attempt_id):
     for response in responses:
         question = Question.query.get(response.question_id)
         questions.append(question)
+        if response.selected_option == 1:
+            response.selected_option = question.option1
+        elif response.selected_option == 2:
+            response.selected_option = question.option2
+        elif response.selected_option == 3:
+            response.selected_option = question.option3
+        elif response.selected_option == 4:
+            response.selected_option = question.option4
+        else:
+            response.selected_option = "None"
 
+        if question.answer == 1:
+            question.answer = question.option1
+        elif question.answer == 2:
+            question.answer = question.option2
+        elif question.answer == 3:
+            question.answer = question.option3
+        elif question.answer == 4:
+            question.answer = question.option4
     # Pre-zip responses and questions
     response_question_pairs = zip(responses, questions)
 
