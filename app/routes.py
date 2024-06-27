@@ -52,7 +52,7 @@ def logout():
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    tests = Test.query.filter_by(author=current_user)
+    tests = Test.query.filter_by().all()
     return render_template('dashboard.html', title='Dashboard', tests=tests)
 
 @bp.route("/test/new", methods=['GET', 'POST'])
@@ -71,7 +71,14 @@ def new_test():
 @login_required
 def test_detail(test_id):
     test = Test.query.get_or_404(test_id)
-    return render_template('test_detail.html', title=test.title, test=test)
+    questions_exist = test.questions
+    if questions_exist:
+        questions_exist = True
+    else:
+        questions_exist = False
+    attempts = Attempt.query.filter_by(test_id=test.id).all()
+
+    return render_template('test_detail.html', title=test.title, test=test, questions_exist=questions_exist, attempts=attempts)
 
 @bp.route('/test/<int:test_id>/upload', methods=['GET', 'POST'])
 @login_required
@@ -231,8 +238,40 @@ def attempt_detail(attempt_id):
     for response in responses:
         question = Question.query.get(response.question_id)
         questions.append(question)
+        if response.selected_option == 1:
+            response.selected_option = question.option1
+        elif response.selected_option == 2:
+            response.selected_option = question.option2
+        elif response.selected_option == 3:
+            response.selected_option = question.option3
+        elif response.selected_option == 4:
+            response.selected_option = question.option4
+        else:
+            response.selected_option = "None"
 
+        if question.answer == 1:
+            question.answer = question.option1
+        elif question.answer == 2:
+            question.answer = question.option2
+        elif question.answer == 3:
+            question.answer = question.option3
+        elif question.answer == 4:
+            question.answer = question.option4
     # Pre-zip responses and questions
     response_question_pairs = zip(responses, questions)
 
     return render_template('attempt_detail.html', title='Attempt Detail', attempt=attempt, response_question_pairs=response_question_pairs)
+
+@bp.route("/test/<int:test_id>/previous_attempts")
+@login_required
+def previous_attempts(test_id):
+    test = Test.query.get_or_404(test_id)
+    attempts = Attempt.query.filter_by(test_id=test.id, user_id=current_user.id).all()
+    return render_template('previous_attempts.html', title='Previous Attempts', attempts=attempts)
+
+@bp.route("/test/<int:test_id>/view_answers")
+@login_required
+def view_answers(test_id):
+    test = Test.query.get_or_404(test_id)
+    questions = test.questions
+    return render_template('view_answers.html', title=f'Answers for {test.title}', test=test, questions=questions)
